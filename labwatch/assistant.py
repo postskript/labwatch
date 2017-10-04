@@ -13,7 +13,7 @@ import sacred.optional as opt
 
 from sacred.commandline_options import QueueOption
 from sacred.observers.mongo import MongoObserver, MongoDbOption
-from sacred.utils import create_basic_stream_logger
+from sacred.utils import create_basic_stream_logger, modules_exist
 
 from labwatch.optimizers.random_search import RandomSearch
 from labwatch.searchspace import SearchSpace, build_search_space, fill_in_values, \
@@ -22,7 +22,7 @@ from labwatch.searchspace import SearchSpace, build_search_space, fill_in_values
 from labwatch.utils.version_checks import (check_dependencies, check_sources,
                                            check_names)
 
-if not opt.has_pymongo:
+if not modules_exist("pymongo"):
     raise RuntimeError("pymongo not found but needed by LabAssistant")
 
 # SON Manipulators for saving and retrieving search spaces
