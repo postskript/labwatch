@@ -100,7 +100,8 @@ class LabAssistant(object):
         self.url = url
         self.db = None
 
-        self.ex.logger = create_basic_stream_logger()
+        if self.ex.logger is None:
+            self.ex.logger = create_basic_stream_logger()
         self.logger = self.ex.logger.getChild('LabAssistant')
         self.prefix = prefix
         self.version_policy = 'newer'
